@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
 import MainNavBar from "../components/MainNavBar";
@@ -32,7 +30,7 @@ function Home() {
   };
 
   return (
-    <div className={styles.homeContainer}>
+    <div className={styles.mainContainer}>
       <MainNavBar onNavigate={handlePageChange} currentPage={currentPage} />
       <div className={styles.contentContainer}>{renderContent()}</div>
     </div>
