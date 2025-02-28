@@ -1,8 +1,8 @@
 import Image from "next/image";
-import styles from "../styles/Modal.module.css";
+import styles from "../../styles/Modal.module.css";
 import PetsMenu from "../../components/PetsMenu";
 
-import cat from "../public/Images/cat.png";
+import catPic from "/cat.png";
 
 function Cats() {
   return (
@@ -12,7 +12,7 @@ function Cats() {
       <div className={styles.content}>
         <div className={styles.animalSection}>
           <div className={styles.animalImg}>
-            <Image className={styles.objectFit} src={cat} />
+            <Image className={styles.objectFit} src={catPic} />
           </div>
 
           <div className={styles.txtContainer}>

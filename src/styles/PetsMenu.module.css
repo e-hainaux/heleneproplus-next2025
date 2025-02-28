@@ -1,9 +1,143 @@
-.mainContainer {
-  width: 100%;
-  height: 100vh;
+@media only screen and (max-width: 700px) {
+  .mainContainer {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .mainContainer.open {
+    transform: translateX(0);
+  }
+  .container.open {
+    backdrop-filter: blur(5px);
+    transition: backdrop-filter 0.3s ease;
+  }
+}
 
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.menuButton {
+  position: fixed;
+  z-index: 1000;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  min-width: 80px;
+  max-width: 200px;
+  height: 100vh;
+  z-index: 900;
+  background-color: white;
+  transition: transform 0.3s ease;
+}
+
+.mainContainer.open {
+  transform: translateX(0);
+}
+
+.imageButton {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  border-radius: 40px 40px 4px 40px;
+  filter: drop-shadow(2px 4px 8px rgba(98, 189, 190, 0.6));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imageButton:hover {
+  transform: scale(1.1);
+  background-color: white;
+  filter: drop-shadow(0 4px 8px rgba(98, 189, 190, 0.75));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.imageButton > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+}
+
+.objectFitDog,
+.objectFitCat,
+.objectFitGroup,
+.objectFitRescaled {
+  transform: scale(0.75);
+  background-color: transparent;
+  object-fit: contain;
+}
+
+.buttonText {
+  align-self: self-end;
+  font-size: 8px;
+  font-weight: 700;
+  color: #5d7879;
+  margin: 0 2px 4px 0;
+}
+
+@media only screen and (max-width: 700px) {
+  .mainContainer {
+    transform: translateX(-100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60vw;
+    max-width: 600px;
+    background-color: rgb(248, 255, 255);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    height: 100vh;
+  }
+
+  .mainContainer.open {
+    transform: translateX(0);
+  }
+
+  .container.open {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(93, 120, 121, 0.5);
+    backdrop-filter: blur(3px);
+    transition: backdrop-filter 1s ease;
+
+    z-index: 800;
+  }
+
+  .imageButton {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px 60px 4px 60px;
+  }
+
+  .buttonText {
+    align-self: self-end;
+    font-size: 16px;
+    margin: 0 2px 4px 0;
+  }
 }

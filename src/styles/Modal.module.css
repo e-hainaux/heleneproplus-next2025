@@ -1,0 +1,122 @@
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* width: 100%;
+    height: 100%; */
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+  background-color: whitesmoke;
+}
+.backBtnContainer {
+  /* width: 100%; */
+  /* height: 15%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  /* border: 2px solid blue; */
+}
+.content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  background-color: white;
+  /* padding: 20px; */
+}
+
+.navBar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  /* background-color: greenyellow;
+    border: 2px dotted red; */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 99999;
+}
+
+.voidDiv {
+  width: 40px;
+  height: 80px;
+}
+.animalSection {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  /* border: 3px solid pink; */
+}
+
+.animalImg {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 45px;
+  box-sizing: content-box !important;
+  /* border: 2px dotted green; */
+}
+
+.txtContainer {
+  width: 80%;
+  height: 100%;
+  padding: 0 20px;
+  /* border: 2px solid orange; */
+}
+
+.objectFit {
+  background-color: transparent;
+  object-fit: contain;
+
+  /* border: 2px solid red !important; */
+}
+
+.freeSpace {
+  width: 80%;
+  min-width: 200px;
+  max-width: 250px;
+  height: 50px;
+  margin-top: 10px;
+  color: whitesmoke;
+  font-weight: 600;
+  font-size: 1.2em;
+  background-color: transparent;
+  border-radius: 8px;
+  border: none;
+  /* border: 2px solid red; */
+}
+
+@media only screen and (max-width: 500px) {
+  .navBar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    /* background-color: greenyellow;
+      border: 2px dotted red; */
+  }
+  .voidDiv {
+    display: none;
+  }
+}

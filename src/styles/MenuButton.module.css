@@ -1,0 +1,25 @@
+.menuButton {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 2px 0 0 2px;
+  background-color: transparent;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.rotated {
+  transform: rotate(45deg);
+}
