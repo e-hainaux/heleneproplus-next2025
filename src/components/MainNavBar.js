@@ -1,14 +1,23 @@
+"use client";
+
 import styles from "../styles/MainNavBar.module.css";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-function MainNavBar({ onNavigate, currentPage }) {
+function MainNavBar() {
+  const pathname = usePathname();
+
+  const isActive = (path) => {
+    if (path === "/" && pathname === "/") return true;
+    if (path !== "/" && pathname === path) return true;
+    return false;
+  };
+
   return (
     <nav className={styles.mainContainer}>
       <div className={styles.navContent}>
-        <div
-          className={styles.logoContainer}
-          onClick={() => onNavigate("welcome")}
-        >
+        <Link href="/" className={styles.logoContainer}>
           <Image
             className={styles.logo}
             src="/globe.svg"
@@ -16,32 +25,35 @@ function MainNavBar({ onNavigate, currentPage }) {
             width={192}
             height={192}
           />
-        </div>
+        </Link>
         <div className={styles.menuContainer}>
           <ul className={styles.menuItems}>
             <li
               className={`${styles.menuItem} ${
-                currentPage === "contact" ? styles.active : ""
+                isActive("/contact") ? styles.active : ""
               }`}
-              onClick={() => onNavigate("contact")}
             >
-              Contact
+              <Link href="/contact" className={styles.menuLink}>
+                Contact
+              </Link>
             </li>
             <li
               className={`${styles.menuItem} ${
-                currentPage === "services" ? styles.active : ""
+                isActive("/pet-services") ? styles.active : ""
               }`}
-              onClick={() => onNavigate("services")}
             >
-              Services
+              <Link href="/pet-services" className={styles.menuLink}>
+                Prestations
+              </Link>
             </li>
             <li
               className={`${styles.menuItem} ${
-                currentPage === "about" ? styles.active : ""
+                isActive("/about") ? styles.active : ""
               }`}
-              onClick={() => onNavigate("about")}
             >
-              À propos
+              <Link href="/about" className={styles.menuLink}>
+                À propos
+              </Link>
             </li>
           </ul>
         </div>
