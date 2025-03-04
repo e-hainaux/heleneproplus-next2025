@@ -13,7 +13,11 @@
 }
 
 .container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: flex-start;
+
   height: 100%;
 }
 
@@ -23,17 +27,21 @@
 }
 
 .mainContainer {
+  position: absolute;
+  top: 80px;
+  left: 0px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
   min-width: 80px;
-  max-width: 200px;
-  height: 100vh;
+  max-width: 120px;
+  height: calc(100vh - 80px);
   z-index: 900;
-  background-color: white;
+  background-color: transparent;
   transition: transform 0.3s ease;
+  border-radius: 0 8px 8px 0;
 }
 
 .mainContainer.open {
@@ -47,8 +55,8 @@
   -ms-user-select: none;
   user-select: none;
   outline: none;
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -86,6 +94,10 @@
 .objectFitCat,
 .objectFitGroup,
 .objectFitRescaled {
+  width: 88%;
+  height: 88%;
+  max-width: 88%;
+  max-height: 88%;
   transform: scale(0.75);
   background-color: transparent;
   object-fit: contain;
@@ -93,10 +105,10 @@
 
 .buttonText {
   align-self: self-end;
-  font-size: 8px;
+  font-size: 12px;
   font-weight: 700;
   color: #5d7879;
-  margin: 0 2px 4px 0;
+  margin: -6px 3px 8px 0;
 }
 
 @media only screen and (max-width: 700px) {
