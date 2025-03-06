@@ -14,13 +14,13 @@ import ExoticPets from "../components/services-components/ExoticPets.js";
 import dogPic from "../../public/images/dog.png";
 import catPic from "../../public/images/cat.png";
 import exoticPic from "../../public/images/exoGlobalPicto.png";
+import horsePic from "../../public/images/horse.gif";
 import chickenPic from "../../public/images/chicken.png";
 
 function PetsMenu({ onAnimalSelect }) {
   const [animalModal, setAnimalModal] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const handleImageClick = (animal) => {
     console.log(`Vous avez cliqué sur l'image de ${animal}.`);
@@ -35,19 +35,30 @@ function PetsMenu({ onAnimalSelect }) {
     setIsModalOpen(false);
   };
 
-  const handleMenuButtonClick = () => {
+  const handleMenuButtonClick = (e) => {
+    e.stopPropagation(); // Empêche la propagation du clic
     setIsMenuOpen(!isMenuOpen);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 700);
-    };
+  // Fermer le menu si on clique en dehors
+  const handleOutsideClick = (e) => {
+    if (
+      isMenuOpen &&
+      !e.target.closest(`.${styles.mainContainer}`) &&
+      !e.target.closest(`.${styles.menuButton}`)
+    ) {
+      setIsMenuOpen(false);
+    }
+  };
 
-    handleResize(); // Check initial screen size
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  useEffect(() => {
+    // Ajouter l'event listener pour les clics en dehors
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isMenuOpen]);
 
   const renderModalContent = () => {
     switch (animalModal) {
@@ -66,27 +77,9 @@ function PetsMenu({ onAnimalSelect }) {
 
   return (
     <div className={`${styles.container} ${isMenuOpen ? styles.open : ""}`}>
-      {isSmallScreen && (
-        <MenuButton isOpen={isMenuOpen} onClick={handleMenuButtonClick} />
-      )}
       <div
-        className={`${styles.mainContainer} ${
-          isMenuOpen || !isSmallScreen ? styles.open : ""
-        }`}
+        className={`${styles.mainContainer} ${isMenuOpen ? styles.open : ""}`}
       >
-        <button
-          onClick={() => handleImageClick("dog")}
-          className={styles.imageButton}
-        >
-          <div className={styles.chiens}>
-            <Image
-              className={styles.objectFitDog}
-              src={dogPic}
-              alt="Dog icon"
-            />
-            <span className={styles.buttonText}>Chiens</span>
-          </div>
-        </button>
         <button
           onClick={() => handleImageClick("cat")}
           className={styles.imageButton}
@@ -100,6 +93,20 @@ function PetsMenu({ onAnimalSelect }) {
             <span className={styles.buttonText}>Chats</span>
           </div>
         </button>
+        <button
+          onClick={() => handleImageClick("dog")}
+          className={styles.imageButton}
+        >
+          <div className={styles.chiens}>
+            <Image
+              className={styles.objectFitDog}
+              src={dogPic}
+              alt="Dog icon"
+            />
+            <span className={styles.buttonText}>Chiens</span>
+          </div>
+        </button>
+
         <button
           onClick={() => handleImageClick("exotic")}
           className={styles.imageButton}
@@ -126,6 +133,21 @@ function PetsMenu({ onAnimalSelect }) {
             <span className={styles.buttonText}>Basse-cour</span>
           </div>
         </button>
+
+        <button
+          onClick={() => handleImageClick("horse")}
+          className={styles.imageButton}
+        >
+          <div className={styles.horses}>
+            <Image
+              className={styles.objectFitHorse}
+              src={horsePic}
+              alt="Cat icon"
+            />
+            <span className={styles.buttonText}>Équidés</span>
+          </div>
+        </button>
+        <MenuButton isOpen={isMenuOpen} onClick={handleMenuButtonClick} />
       </div>
       {isModalOpen && renderModalContent()}
     </div>

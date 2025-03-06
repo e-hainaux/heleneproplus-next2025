@@ -20,10 +20,10 @@ function MainNavBar() {
         <Link href="/" className={styles.logoContainer}>
           <Image
             className={styles.logo}
-            src="/globe.svg"
+            src="/images/HeleneProPlusBasicLogo.png"
             alt="Logo"
-            width={192}
-            height={192}
+            width={400}
+            height={400}
           />
         </Link>
         <div className={styles.menuContainer}>
