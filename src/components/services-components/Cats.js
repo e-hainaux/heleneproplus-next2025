@@ -7,8 +7,6 @@ import catPic from "../../../public/images/cat.png";
 function Cats() {
   return (
     <div className={styles.mainContainer}>
-      <PetsMenu />
-
       <div className={styles.content}>
         <div className={styles.animalSection}>
           <div className={styles.animalImg}>
