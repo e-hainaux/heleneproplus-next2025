@@ -18,7 +18,7 @@ const FarmyardAnimals = dynamic(() =>
 
 function Services() {
   const { selectedAnimal, handleAnimalSelection } = useAnimalSelection();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const renderSelectedAnimalComponent = () => {
     switch (selectedAnimal) {
@@ -32,9 +32,9 @@ function Services() {
         return <FarmyardAnimals />;
       default:
         return (
-          <div>
+          <div className={styles.servicesWelcome}>
             <h1>Nos Services</h1>
-            <p>Sélectionnez un type d'animal dans le menu</p>
+            <p>Sélectionnez une catégorie d'animal dans le menu à gauche</p>
           </div>
         );
     }

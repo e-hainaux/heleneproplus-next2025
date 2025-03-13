@@ -9,7 +9,7 @@ const MenuButton = ({ isOpen, onClick }) => {
       onClick={onClick}
       aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
     >
-      <FaCirclePlus size={32} style={{ color: "#617b7b" }} />
+      <FaCirclePlus size={32} style={{ color: "#1da5a5" }} />
     </button>
   );
 };

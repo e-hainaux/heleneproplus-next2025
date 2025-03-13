@@ -1,4 +1,6 @@
 .menuButton {
+  position: absolute;
+  right: 24px;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
