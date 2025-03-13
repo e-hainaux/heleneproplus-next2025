@@ -1,6 +1,5 @@
 import Image from "next/image";
 import styles from "../../styles/Modal.module.css";
-import PetsMenu from "../../components/PetsMenu";
 
 import catPic from "../../../public/images/cat.png";
 

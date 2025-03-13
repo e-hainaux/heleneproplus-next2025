@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/PetServices.module.css";
 import PetsMenu from "../../components/PetsMenu";
 import { useAnimalSelection } from "../hooks/useAnimalSelection";
@@ -18,6 +18,7 @@ const FarmyardAnimals = dynamic(() =>
 
 function Services() {
   const { selectedAnimal, handleAnimalSelection } = useAnimalSelection();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const renderSelectedAnimalComponent = () => {
     switch (selectedAnimal) {
@@ -41,8 +42,19 @@ function Services() {
 
   return (
     <div className={styles.mainContainer}>
-      <PetsMenu onAnimalSelect={handleAnimalSelection} />
-      {renderSelectedAnimalComponent()}
+      <PetsMenu
+        onAnimalSelect={handleAnimalSelection}
+        onMenuToggle={setIsMenuOpen}
+        isOpen={isMenuOpen}
+      />
+
+      <div
+        className={`${styles.contentContainer} ${
+          isMenuOpen ? styles.blurred : ""
+        }`}
+      >
+        {renderSelectedAnimalComponent()}
+      </div>
     </div>
   );
 }

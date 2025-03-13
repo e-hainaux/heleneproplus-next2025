@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/PetsMenu.module.css";
 import MenuButton from "./buttons/MenuButton";
 import Image from "next/image";
@@ -11,30 +11,29 @@ import exoticPic from "../../public/images/exoGlobalPicto.png";
 import horsePic from "../../public/images/horse.gif";
 import chickenPic from "../../public/images/chicken.png";
 
-function PetsMenu({ onAnimalSelect }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+function PetsMenu({ onAnimalSelect, onMenuToggle, isOpen }) {
   const handleImageClick = (animal) => {
     console.log(`Vous avez cliqué sur l'image de ${animal}.`);
 
     if (onAnimalSelect) {
       onAnimalSelect(animal);
     }
+    onMenuToggle(false); // Utiliser onMenuToggle au lieu de setIsMenuOpen
   };
 
   const handleMenuButtonClick = (e) => {
     e.stopPropagation(); // Empêche la propagation du clic
-    setIsMenuOpen(!isMenuOpen);
+    onMenuToggle(!isOpen); // Utiliser la fonction passée en prop pour inverser l'état
   };
 
   // Fermer le menu si on clique en dehors
   const handleOutsideClick = (e) => {
     if (
-      isMenuOpen &&
+      isOpen && // Utiliser isOpen au lieu de isMenuOpen
       !e.target.closest(`.${styles.mainContainer}`) &&
       !e.target.closest(`.${styles.menuButton}`)
     ) {
-      setIsMenuOpen(false);
+      onMenuToggle(false); // Utiliser onMenuToggle au lieu de setIsMenuOpen
     }
   };
 
@@ -45,10 +44,10 @@ function PetsMenu({ onAnimalSelect }) {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isMenuOpen]);
+  }, [isOpen]); // Dépendance mise à jour pour utiliser isOpen
 
   return (
-    <div className={`${styles.mainContainer} ${isMenuOpen ? styles.open : ""}`}>
+    <div className={`${styles.mainContainer} ${isOpen ? styles.open : ""}`}>
       <button
         onClick={() => handleImageClick("cat")}
         className={styles.imageButton}
@@ -108,7 +107,7 @@ function PetsMenu({ onAnimalSelect }) {
           <span className={styles.buttonText}>Équidés</span>
         </div>
       </button>
-      <MenuButton isOpen={isMenuOpen} onClick={handleMenuButtonClick} />
+      <MenuButton isOpen={isOpen} onClick={handleMenuButtonClick} />
     </div>
   );
 }

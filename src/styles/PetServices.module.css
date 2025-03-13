@@ -10,3 +10,16 @@
 
   border: 2px dotted green;
 }
+
+/* .petsMenuContainer {
+  position: absolute;
+} */
+
+.contentContainer {
+  width: 100%;
+  transition: filter 0.8s ease-in-out;
+}
+
+.contentContainer.blurred {
+  filter: blur(5px);
+  pointer-events: none;
