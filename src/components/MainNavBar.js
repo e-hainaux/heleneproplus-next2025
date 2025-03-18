@@ -30,20 +30,29 @@ function MainNavBar() {
           <ul className={styles.menuItems}>
             <li
               className={`${styles.menuItem} ${
-                isActive("/contact") ? styles.active : ""
-              }`}
-            >
-              <Link href="/contact" className={styles.menuLink}>
-                Contact
-              </Link>
-            </li>
-            <li
-              className={`${styles.menuItem} ${
                 isActive("/pet-services") ? styles.active : ""
               }`}
             >
               <Link href="/pet-services" className={styles.menuLink}>
                 Prestations
+              </Link>
+            </li>
+            <li
+              className={`${styles.menuItem} ${
+                isActive("/pricing") ? styles.active : ""
+              }`}
+            >
+              <Link href="/pricing" className={styles.menuLink}>
+                Tarifs
+              </Link>
+            </li>
+            <li
+              className={`${styles.menuItem} ${
+                isActive("/contact") ? styles.active : ""
+              }`}
+            >
+              <Link href="/contact" className={styles.menuLink}>
+                Contact
               </Link>
             </li>
             <li

@@ -1,8 +1,7 @@
 .mainContainer {
   width: 100%;
-  height: auto;
+  height: 100vh;
 
-  padding: 150px 120px 120px 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;

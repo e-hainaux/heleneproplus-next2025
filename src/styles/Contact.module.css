@@ -1,9 +1,131 @@
 .mainContainer {
+  width: 50%;
+  height: auto;
+  position: relative;
+  top: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background-color: blue;
+}
+
+.content {
   width: 100%;
-  height: 100vh;
+  min-width: 280px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: pink;
+  background-color: white;
+  padding: 20px;
+
+  /* border: 1px solid blue; */
+}
+
+.content > h1 {
+  font-size: 1.5em;
+  text-align: center;
+  /* border: 1px solid red; */
+}
+
+.txtContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.txtContainer > p {
+  max-width: 600px;
+  /* text-align: center;
+  align-self: center; */
+  /* border: 1px solid red; */
+}
+
+.formulaireContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  /* border: 1px solid red; */
+}
+
+.titre {
+  color: whitesmoke;
+  width: 50%;
+  height: 45px;
+  max-width: 300px;
+  min-width: 250px;
+  font-size: 1.75rem;
+  text-align: center;
+  vertical-align: middle;
+  margin: 30px auto;
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-radius: 20px 5px 20px 5px;
+}
+.formGroup {
+  margin-bottom: 20px;
+}
+.info {
+  text-align: center;
+  color: gray;
+  font-size: 0.8rem;
+}
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.textarea {
+  min-height: 100px;
+}
+
+.message {
+  text-align: center;
+  font-size: 1rem;
+  margin: 10px;
+  color: #333;
+  font-weight: bold;
+}
+.btnContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.button {
+  width: 110px;
+  padding: 10px 20px;
+  background-color: #62bdbe;
+  color: white;
+  font-weight: 600;
+  font-size: 1em;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .btnContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .button {
+    margin-top: 10px;
+  }
 }

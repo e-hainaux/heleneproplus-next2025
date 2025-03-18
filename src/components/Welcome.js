@@ -3,8 +3,8 @@ import styles from "../styles/Welcome.module.css";
 function Welcome() {
   return (
     <div className={styles.mainContainer}>
-      <h1>Hélène Pet-sitting PRO +</h1>
-      <h2>~ Un lien humain au service du bien-être animal ~</h2>
+      <h1>Hélène PRO + Petsitting</h1>
+      <h2>L'humain au service de vos animaux</h2>
       <p>
         Garde d'animaux chez les propriétaires et autres services associés.
         <br />
