@@ -1,19 +1,19 @@
 import Image from "next/image";
 import styles from "../../styles/Modal.module.css";
 
-import catPic from "../../../public/images/cat.png";
+import horsePic from "../../../public/images/horse.gif";
 
-function Cats() {
+function Horses() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.content}>
         <div className={styles.animalSection}>
           <div className={styles.animalImg}>
-            <Image className={styles.objectFit} src={catPic} alt="Chat" />
+            <Image className={styles.objectFit} src={horsePic} alt="Cheval" />
           </div>
 
           <div className={styles.txtContainer}>
-            <h1>CHATS</h1>
+            <h1>Équidés</h1>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
               ac ligula eget mi ullamcorper viverra. Duis sagittis lacus eget
@@ -31,4 +31,4 @@ function Cats() {
   );
 }
 
-export default Cats;
+export default Horses;

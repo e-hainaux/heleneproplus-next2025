@@ -6,6 +6,7 @@ import PetsMenu from "../../components/PetsMenu";
 import { useAnimalSelection } from "../hooks/useAnimalSelection";
 
 import dynamic from "next/dynamic";
+import Horses from "@/components/services-components/Horses";
 
 const Cats = dynamic(() => import("../../components/services-components/Cats"));
 const Dogs = dynamic(() => import("../../components/services-components/Dogs"));
@@ -30,6 +31,8 @@ function Services() {
         return <ExoticPets />;
       case "chicken":
         return <FarmyardAnimals />;
+      case "horse":
+        return <Horses />;
       default:
         return (
           <div className={styles.servicesWelcome}>

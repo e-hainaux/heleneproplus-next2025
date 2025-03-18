@@ -1,19 +1,19 @@
-import React from "react";
 import Image from "next/image";
-
 import styles from "../../styles/Modal.module.css";
 
 import exoticPic from "../../../public/images/exoGlobalPicto.png";
 
-function NAC({ onClose }) {
+function ExoticPets() {
   return (
     <div className={styles.mainContainer}>
-      <NavBar onClose={onClose} />
-
       <div className={styles.content}>
         <div className={styles.animalSection}>
           <div className={styles.animalImg}>
-            <Image className={styles.objectFit} src={exoticPic} />
+            <Image
+              className={styles.objectFit}
+              src={exoticPic}
+              alt="Animaux exotiques"
+            />
           </div>
 
           <div className={styles.txtContainer}>
@@ -35,4 +35,4 @@ function NAC({ onClose }) {
   );
 }
 
-export default NAC;
+export default ExoticPets;

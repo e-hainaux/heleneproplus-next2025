@@ -1,8 +1,7 @@
-import React from "react";
 import Image from "next/image";
 import styles from "../../styles/Modal.module.css";
 
-import dog from "../../../public/images/dog.png";
+import dogPic from "../../../public/images/dog.png";
 
 function Chiens() {
   return (
@@ -10,8 +9,9 @@ function Chiens() {
       <div className={styles.content}>
         <div className={styles.animalSection}>
           <div className={styles.animalImg}>
-            <Image className={styles.objectFit} src={dog} />
+            <Image className={styles.objectFit} src={dogPic} alt="Chien" />
           </div>
+
           <div className={styles.txtContainer}>
             <h1>CHIENS</h1>
             <p>
