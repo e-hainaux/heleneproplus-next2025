@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/Contact.module.css";
 
 import ReCAPTCHA from "react-google-recaptcha";
@@ -16,48 +16,64 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
   const [commentaire, setCommentaire] = useState("");
-  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  // Effet pour masquer la popup de succès après 3 secondes
+  useEffect(() => {
+    let timeoutId;
+    if (showSuccessPopup) {
+      timeoutId = setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 3000);
+    }
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [showSuccessPopup]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
 
     // Vérification des champs obligatoires
     if (!prenom || !nom || (!email && !telephone)) {
-      setMessage(
+      setErrorMessage(
         "Les champs prénom, nom et au moins un moyen de contact (email ou téléphone) sont obligatoires."
       );
       return;
     }
 
     // Validation des champs avec des expressions régulières
-    const prenomRegex = /^[A-Za-zÀ-ÿ-]{1,20}$/;
-    const nomRegex = /^[A-Za-zÀ-ÿ\s-]{1,30}$/;
+    const prenomRegex = /^[A-Za-zÀ-ÿ]+([-\s][A-Za-zÀ-ÿ]+)*$/;
+    const nomRegex = /^[A-Za-zÀ-ÿ]+([-\s][A-Za-zÀ-ÿ]+)*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telephoneRegex = /^(0|\+33|0033)[1-9]([-. ]?[0-9]{2}){4}$/;
 
-    if (!prenomRegex.test(prenom)) {
-      setMessage(
-        "Le prénom doit utiliser des lettres uniquement et contenir au maximum 20 caractères."
+    if (!prenomRegex.test(prenom) || prenom.length > 20) {
+      setErrorMessage(
+        "Le prénom doit contenir uniquement des lettres, espaces ou tirets (pour les prénoms composés) et faire maximum 20 caractères."
       );
       return;
     }
 
-    if (!nomRegex.test(nom)) {
-      setMessage(
-        "Le nom doit utiliser des lettres uniquement et contenir au maximum 30 caractères."
+    if (!nomRegex.test(nom) || prenom.length > 20) {
+      setErrorMessage(
+        "Le nom doit contenir uniquement des lettres, espaces ou tirets (pour les prénoms composés) et faire maximum 30 caractères."
       );
       return;
     }
 
     if (email && !emailRegex.test(email)) {
-      setMessage(
+      setErrorMessage(
         "L'adresse mail doit correspondre au format adresse@site.extension."
       );
       return;
     }
 
     if (telephone && !telephoneRegex.test(telephone)) {
-      setMessage(
+      setErrorMessage(
         "Le numéro de téléphone doit utiliser uniquement des chiffres et correspondre à un numéro de portable ou de fixe français."
       );
       return;
@@ -79,7 +95,9 @@ function Contact() {
     const result = await submitForm("/form/send-email", formData);
 
     if (result.success) {
-      setMessage("Votre formulaire a été soumis avec succès.");
+      setSuccessMessage("Votre formulaire a été soumis avec succès.");
+      setShowSuccessPopup(true);
+
       // Réinitialisation du formulaire
       setPrenom("");
       setNom("");
@@ -88,11 +106,18 @@ function Contact() {
       setCommentaire("");
       setToken(null);
     } else {
-      setMessage("Erreur lors de l'envoi du formulaire. Veuillez réessayer.");
+      setErrorMessage(
+        "Erreur lors de l'envoi du formulaire. Veuillez réessayer."
+      );
     }
   };
+
   return (
-    <div className={styles.mainContainer}>
+    <div
+      className={`${styles.mainContainer} ${
+        showSuccessPopup ? styles.hasPopup : ""
+      }`}
+    >
       <div className={styles.content}>
         <h1>CONTACT / DEVIS GRATUIT</h1>
         <div className={styles.txtContainer}>
@@ -153,7 +178,11 @@ function Contact() {
                 className={styles.textarea}
               ></textarea>
             </div>
-            <div className={styles.message}>{message}</div>
+
+            {errorMessage && (
+              <div className={styles.errorMessage}>{errorMessage}</div>
+            )}
+
             <div className={styles.btnContainer}>
               <ReCAPTCHA
                 sitekey={siteKey}
@@ -166,6 +195,15 @@ function Contact() {
           </form>
         </div>
       </div>
+      {/* Popup de succès */}
+      {showSuccessPopup && (
+        <div className={styles.successPopupContainer}>
+          <div className={styles.successPopup}>
+            <div className={styles.successIcon}>✓</div>
+            <div className={styles.successMessage}>{successMessage}</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
