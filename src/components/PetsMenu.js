@@ -18,33 +18,31 @@ function PetsMenu({ onAnimalSelect, onMenuToggle, isOpen }) {
     if (onAnimalSelect) {
       onAnimalSelect(animal);
     }
-    onMenuToggle(false); // Utiliser onMenuToggle au lieu de setIsMenuOpen
+    onMenuToggle(false);
   };
 
   const handleMenuButtonClick = (e) => {
-    e.stopPropagation(); // Empêche la propagation du clic
-    onMenuToggle(!isOpen); // Utiliser la fonction passée en prop pour inverser l'état
+    e.stopPropagation();
+    onMenuToggle(!isOpen);
   };
 
-  // Fermer le menu si on clique en dehors
   const handleOutsideClick = (e) => {
     if (
-      isOpen && // Utiliser isOpen au lieu de isMenuOpen
+      isOpen &&
       !e.target.closest(`.${styles.mainContainer}`) &&
       !e.target.closest(`.${styles.menuButton}`)
     ) {
-      onMenuToggle(false); // Utiliser onMenuToggle au lieu de setIsMenuOpen
+      onMenuToggle(false);
     }
   };
 
   useEffect(() => {
-    // Ajouter l'event listener pour les clics en dehors
     document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [isOpen]); // Dépendance mise à jour pour utiliser isOpen
+  }, [isOpen]);
 
   return (
     <div className={`${styles.mainContainer} ${isOpen ? styles.open : ""}`}>

@@ -31,3 +31,23 @@
 .rotated:hover {
   transform: rotate(45deg) scale(1.1);
 }
+
+@media only screen and (max-width: 700px) {
+  .menuButton {
+    background-color: rgba(245, 245, 245, 0.5);
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+
+    box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .rotated {
+    background-color: whitesmoke;
+
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border-radius: 80px;
+    box-shadow: 4px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+}
