@@ -1,14 +1,13 @@
 .mainContainer {
   width: 100vw;
   height: 100vh;
-
+  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: pink;
-
-  /* border: 2px dotted green; */
+  gap: 24px;
+  background-color: whitesmoke;
 }
 
 .servicesWelcome {

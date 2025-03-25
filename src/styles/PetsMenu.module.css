@@ -1,6 +1,7 @@
 .mainContainer {
   position: absolute;
   left: 0;
+  top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

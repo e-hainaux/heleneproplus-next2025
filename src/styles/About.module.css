@@ -1,11 +1,15 @@
 .mainContainer {
+  position: relative;
+  left: 0;
+  top: 120px;
   width: 100%;
   height: auto;
 
-  padding: 150px 120px 120px 80px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: pink;
+  gap: 24px;
+  background-color: whitesmoke;
 }
