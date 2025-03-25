@@ -19,8 +19,8 @@ function Contact() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Effet pour masquer la popup de succès après 3 secondes
   useEffect(() => {
     let timeoutId;
     if (showSuccessPopup) {
@@ -36,8 +36,8 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    setIsSubmitting(false);
 
-    // Vérification des champs obligatoires
     if (!prenom || !nom || (!email && !telephone)) {
       setErrorMessage(
         "Les champs prénom, nom et au moins un moyen de contact (email ou téléphone) sont obligatoires."
@@ -45,7 +45,6 @@ function Contact() {
       return;
     }
 
-    // Validation des champs avec des expressions régulières
     const prenomRegex = /^[A-Za-zÀ-ÿ]+([-\s][A-Za-zÀ-ÿ]+)*$/;
     const nomRegex = /^[A-Za-zÀ-ÿ]+([-\s][A-Za-zÀ-ÿ]+)*$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -79,10 +78,8 @@ function Contact() {
       return;
     }
 
-    // Nettoyage du commentaire en supprimant tout le code HTML
     const cleanedCommentaire = commentaire.replace(/(<([^>]+)>)/gi, "");
 
-    // Données à envoyer au backend
     const formData = {
       token,
       prenom,
@@ -92,13 +89,16 @@ function Contact() {
       commentaire: cleanedCommentaire,
     };
 
+    setIsSubmitting(true);
+
     const result = await submitForm("/form/send-email", formData);
+
+    setIsSubmitting(false);
 
     if (result.success) {
       setSuccessMessage("Votre formulaire a été soumis avec succès.");
       setShowSuccessPopup(true);
 
-      // Réinitialisation du formulaire
       setPrenom("");
       setNom("");
       setEmail("");
@@ -188,14 +188,24 @@ function Contact() {
                 sitekey={siteKey}
                 onChange={(value) => setToken(value)}
               />
-              <button disabled={!token} type="submit" className={styles.button}>
-                Envoyer
+              <button
+                disabled={!token || isSubmitting}
+                type="submit"
+                className={`${styles.button} ${
+                  isSubmitting ? styles.loading : ""
+                }`}
+              >
+                {isSubmitting ? (
+                  <div className={styles.loadingSpinner}></div>
+                ) : (
+                  "Envoyer"
+                )}
               </button>
             </div>
           </form>
         </div>
       </div>
-      {/* Popup de succès */}
+
       {showSuccessPopup && (
         <div className={styles.successPopupContainer}>
           <div className={styles.successPopup}>
