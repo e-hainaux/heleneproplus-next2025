@@ -19,7 +19,6 @@ function Contact() {
   const [errorMessage, setErrorMessage] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     let timeoutId;
@@ -33,10 +32,29 @@ function Contact() {
     };
   }, [showSuccessPopup]);
 
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(error);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (success) {
+      setSuccessMessage("Votre formulaire a été soumis avec succès.");
+      setShowSuccessPopup(true);
+
+      setPrenom("");
+      setNom("");
+      setEmail("");
+      setTelephone("");
+      setCommentaire("");
+      setToken(null);
+    }
+  }, [success]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    setIsSubmitting(false);
 
     if (!prenom || !nom || (!email && !telephone)) {
       setErrorMessage(
@@ -89,27 +107,7 @@ function Contact() {
       commentaire: cleanedCommentaire,
     };
 
-    setIsSubmitting(true);
-
-    const result = await submitForm("/form/send-email", formData);
-
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setSuccessMessage("Votre formulaire a été soumis avec succès.");
-      setShowSuccessPopup(true);
-
-      setPrenom("");
-      setNom("");
-      setEmail("");
-      setTelephone("");
-      setCommentaire("");
-      setToken(null);
-    } else {
-      setErrorMessage(
-        "Erreur lors de l'envoi du formulaire. Veuillez réessayer."
-      );
-    }
+    await submitForm("/form/send-email", formData);
   };
 
   return (
@@ -189,13 +187,13 @@ function Contact() {
                 onChange={(value) => setToken(value)}
               />
               <button
-                disabled={!token || isSubmitting}
+                disabled={!token || isLoading}
                 type="submit"
                 className={`${styles.button} ${
-                  isSubmitting ? styles.loading : ""
+                  isLoading ? styles.loading : ""
                 }`}
               >
-                {isSubmitting ? (
+                {isLoading ? (
                   <div className={styles.loadingSpinner}></div>
                 ) : (
                   "Envoyer"
