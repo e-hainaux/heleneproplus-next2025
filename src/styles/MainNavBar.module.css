@@ -132,6 +132,20 @@
     text-align: center;
   }
 
+  .mobileMenuOverlay > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    text-decoration: none;
+  }
+
+  .mobileMenuOverlay > a > span {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+  }
+
   .mobileMenuItems .menuItem {
     font-size: 1.5rem;
     opacity: 0;

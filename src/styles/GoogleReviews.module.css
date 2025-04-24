@@ -1,0 +1,24 @@
+.link {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  text-decoration: none;
+  color: #333;
+  gap: 0.4rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.star {
+  font-size: 1.2rem;
+  color: #fbbc04;
+}
+
+.text {
+  font-size: 1rem;
+  color: inherit;
+}

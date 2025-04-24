@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBars, FaTimes } from "react-icons/fa";
+import GoogleReviews from "./buttons/GoogleReviews";
 
 function MainNavBar() {
   const pathname = usePathname();
@@ -73,6 +74,7 @@ function MainNavBar() {
             <ul className={styles.menuItems}>
               {renderMenuItems(isActive, false)}
             </ul>
+            <GoogleReviews />
           </div>
         )}
 
@@ -86,6 +88,7 @@ function MainNavBar() {
             <ul className={styles.mobileMenuItems}>
               {renderMenuItems(isActive, true)}
             </ul>
+            <GoogleReviews />
           </div>
         )}
       </div>
