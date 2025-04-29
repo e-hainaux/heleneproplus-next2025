@@ -25,3 +25,80 @@
   pointer-events: none;
   opacity: 0.5;
 }
+
+.socialContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  width: 100vw;
+  height: 100%;
+}
+
+.footerParagraph {
+  text-align: center;
+  width: 100%;
+  padding-top: 8px;
+  color: #10a5a8;
+}
+
+.socialLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.socialLinks a {
+  color: #282c34;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+
+  /* Ajout des propriétés pour supprimer la surbrillance */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  touch-action: manipulation;
+}
+
+.socialLinks a:active {
+  outline: none;
+  background-color: transparent;
+}
+
+.socialLinks a.instagram {
+  position: relative;
+}
+
+.socialLinks a.instagram svg {
+  fill: #282c34;
+  transition: fill 0.3s ease;
+}
+
+.socialLinks a.instagram:hover svg {
+  fill: url(#instagram-gradient);
+}
+
+.facebook:hover {
+  color: #0866ff;
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+  .footerParagraph {
+    padding-top: 24px;
+  }
+  .socialLinks {
+    margin-bottom: 8px;
+  }
+}
