@@ -5,16 +5,17 @@ import styles from "../styles/MainNavBar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import GoogleReviews from "./buttons/GoogleReviews";
 import useIsMobile from "../app/hooks/useIsMobile";
-import { menuLinks, menuConfig } from "../app/config/menuConfig";
+import { menuConfig } from "../app/config/menuConfig";
 import MobileMenu from "./MobileMenu";
+import DesktopMenu from "./DesktopMenu";
 
 function MainNavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isMobile = useIsMobile(menuConfig.mobileBreakpoint);
 
+  // Détermine si un lien est actif en fonction du chemin actuel
   const isActive = (path) => {
     if (path === "/" && pathname === "/") return true;
     if (path !== "/" && pathname === path) return true;
@@ -51,34 +52,15 @@ function MainNavBar() {
           />
         </Link>
 
-        {/* Menu mobile - affiché uniquement sur mobile */}
-        {isMobile && (
+        {/* Affichage conditionnel du menu selon la taille de l'écran */}
+        {isMobile ? (
           <MobileMenu
             isOpen={isMobileMenuOpen}
             toggleMenu={toggleMobileMenu}
             isActive={isActive}
           />
-        )}
-
-        {/* Menu desktop - affiché uniquement sur desktop */}
-        {!isMobile && (
-          <div className={styles.menuContainer}>
-            <ul className={styles.menuItems}>
-              {menuLinks.map((link) => (
-                <li
-                  key={link.href}
-                  className={`${styles.menuItem} ${
-                    isActive(link.href) ? styles.active : ""
-                  }`}
-                >
-                  <Link href={link.href} className={styles.menuLink}>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <GoogleReviews />
-          </div>
+        ) : (
+          <DesktopMenu isActive={isActive} />
         )}
       </div>
     </nav>
