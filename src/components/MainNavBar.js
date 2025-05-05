@@ -5,15 +5,14 @@ import styles from "../styles/MainNavBar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBars, FaTimes } from "react-icons/fa";
 import GoogleReviews from "./buttons/GoogleReviews";
 import useIsMobile from "../app/hooks/useIsMobile";
 import { menuLinks, menuConfig } from "../app/config/menuConfig";
+import MobileMenu from "./MobileMenu";
 
 function MainNavBar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const isMobile = useIsMobile(menuConfig.mobileBreakpoint);
 
   const isActive = (path) => {
@@ -37,6 +36,7 @@ function MainNavBar() {
       }`}
     >
       <div className={styles.navContent}>
+        {/* Logo */}
         <Link
           href="/"
           className={styles.logoContainer}
@@ -51,32 +51,31 @@ function MainNavBar() {
           />
         </Link>
 
-        {/* Burger Menu Icon - visible uniquement sur mobile */}
+        {/* Menu mobile - affiché uniquement sur mobile */}
         {isMobile && (
-          <div className={styles.burgerMenu} onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </div>
+          <MobileMenu
+            isOpen={isMobileMenuOpen}
+            toggleMenu={toggleMobileMenu}
+            isActive={isActive}
+          />
         )}
 
-        {/* Menu Desktop - caché uniquement sur mobile */}
+        {/* Menu desktop - affiché uniquement sur desktop */}
         {!isMobile && (
           <div className={styles.menuContainer}>
             <ul className={styles.menuItems}>
-              {renderMenuItems(isActive, false)}
-            </ul>
-            <GoogleReviews />
-          </div>
-        )}
-
-        {/* Menu Mobile - visible uniquement sur mobile */}
-        {isMobile && (
-          <div
-            className={`${styles.mobileMenuOverlay} ${
-              isMobileMenuOpen ? styles.active : ""
-            }`}
-          >
-            <ul className={styles.mobileMenuItems}>
-              {renderMenuItems(isActive, true)}
+              {menuLinks.map((link) => (
+                <li
+                  key={link.href}
+                  className={`${styles.menuItem} ${
+                    isActive(link.href) ? styles.active : ""
+                  }`}
+                >
+                  <Link href={link.href} className={styles.menuLink}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <GoogleReviews />
           </div>
@@ -84,42 +83,6 @@ function MainNavBar() {
       </div>
     </nav>
   );
-}
-
-// Fonction pour générer les éléments de menu
-function renderMenuItems(isActive, isMobile) {
-  return menuLinks.map((link, index) => (
-    <li
-      key={link.href}
-      className={`${styles.menuItem} ${
-        isActive(link.href) ? styles.active : ""
-      }`}
-      style={
-        isMobile
-          ? {
-              transitionDelay: `${
-                menuConfig.transitionDelayBase * (index + 1)
-              }s`,
-            }
-          : {}
-      }
-    >
-      <Link
-        href={link.href}
-        className={styles.menuLink}
-        onClick={
-          isMobile
-            ? () => {
-                // Fermer le menu mobile après un clic
-                document.querySelector(`.${styles.burgerMenu}`)?.click();
-              }
-            : undefined
-        }
-      >
-        {link.label}
-      </Link>
-    </li>
-  ));
 }
 
 export default MainNavBar;
