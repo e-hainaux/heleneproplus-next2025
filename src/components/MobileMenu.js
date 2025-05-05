@@ -1,10 +1,9 @@
 "use client";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-import Link from "next/link";
 import styles from "../styles/MainNavBar.module.css";
 import GoogleReviews from "./buttons/GoogleReviews";
-import { menuLinks, menuConfig } from "../app/config/menuConfig";
+import NavItems from "./navigation/NavItems";
 
 /**
  * Composant pour le menu mobile qui inclut l'icône burger et l'overlay
@@ -14,6 +13,7 @@ import { menuLinks, menuConfig } from "../app/config/menuConfig";
  * @param {Function} props.isActive - Fonction pour déterminer si un lien est actif
  */
 function MobileMenu({ isOpen, toggleMenu, isActive }) {
+  // Fonction pour fermer le menu après avoir cliqué sur un lien
   const handleLinkClick = () => {
     toggleMenu();
   };
@@ -29,29 +29,11 @@ function MobileMenu({ isOpen, toggleMenu, isActive }) {
       <div
         className={`${styles.mobileMenuOverlay} ${isOpen ? styles.active : ""}`}
       >
-        <ul className={styles.mobileMenuItems}>
-          {menuLinks.map((link, index) => (
-            <li
-              key={link.href}
-              className={`${styles.menuItem} ${
-                isActive(link.href) ? styles.active : ""
-              }`}
-              style={{
-                transitionDelay: `${
-                  menuConfig.transitionDelayBase * (index + 1)
-                }s`,
-              }}
-            >
-              <Link
-                href={link.href}
-                className={styles.menuLink}
-                onClick={handleLinkClick}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <NavItems
+          isActive={isActive}
+          isMobile={true}
+          onItemClick={handleLinkClick}
+        />
         <GoogleReviews />
       </div>
     </>
